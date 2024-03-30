@@ -20,8 +20,7 @@
 //
 //////////////////////////////////////////////////////////////////////////////////
 //behavioral floating-point multiplication
-module mul (flp_a, flp_b, sign, exponent,
-						exp_unbiased, exp_sum, prod,sum);
+module mul (flp_a, flp_b, sign, exponent, exp_unbiased, exp_sum, prod,sum);
   input [15:0] flp_a, flp_b;
 	output sign;
   output [4:0] exponent, exp_unbiased;
