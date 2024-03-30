@@ -1,27 +1,21 @@
-// testbench for Half_ALT
-module tb;
-    reg [15:0]a;
-    reg [15:0] b;
-
-    wire sum;
-    wire[4:0] exp;
-    wire[20:0] frac_norm;
-
-    Half_ALT inst(a,b,sum,exp,frac_norm);
-
-    initial
-    begin
-        a=16'b1000111111100000;
-        b=16'b1000101111100001;
-
-        #100 
-
-        a=16'b0000111111100001;
-        b=16'b1000101111100001;
-    end
-
-    always @(a or b)begin
-        $monitor("a=%b b=%b sum=%b",a,b,sum);
-    end
-
+// Code your testbench here
+// or browse Examples
+module mul1();
+  reg [15:0] flp_a, flp_b;
+	wire sign;
+  wire [4:0] exponent, exp_unbiased;
+  wire [5:0] exp_sum;
+  wire [9:0] prod;
+  wire [15:0] sum ;
+  mul mu(flp_a, flp_b, sign, exponent, exp_unbiased, exp_sum, prod,sum);
+	initial
+      begin
+        flp_a = 16'b1010101010101010;     flp_b = 16'b1100110011001100; 
+       #10;
+$display("flp_a = %f, flp_b = %f",flp_a,flp_b);
+$display("sign = %b, exponent = %b, exp_unbiased = %b,exp_sum = %b", sign, exponent, exp_unbiased, exp_sum);
+$display("prod = %b, sum = %f", prod, sum);
+    // End simulation
+    $finish;
+      end
 endmodule
