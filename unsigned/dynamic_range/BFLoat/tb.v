@@ -2,7 +2,6 @@
 // or browse Examples
 module mul1();
   reg [15:0] flp_a, flp_b;
-	wire sign;
   wire [8:0] exponent, exp_unbiased;
   wire [9:0] exp_sum;
   wire [6:0] prod;
