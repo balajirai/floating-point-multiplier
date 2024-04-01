@@ -1,22 +1,22 @@
 `timescale 1ns / 1ps
 
 ////////////////////////////////////////////////////////////////////////////////
-// Company: 
-// Engineer: 
-// 
+// Company:
+// Engineer:
+//
 // Create Date: 30/01/2024
-// Design Name: 
-// Module Name: mul 
-// Project Name: 
-// Target Devices: 
-// Tool versions: 
-// Description: 
+// Design Name:
+// Module Name: mul
+// Project Name:
+// Target Devices:
+// Tool versions:
+// Description:
 //
-// Dependencies: 
+// Dependencies:
 //
-// Revision: 
+// Revision:
 // Revision 0.01 - File Created
-// Additional Comments: 
+// Additional Comments:
 //
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -33,6 +33,7 @@ module mul (
 );
 
   // Variables used in an always block are declared as registers
+  integer i;
   reg sign_a, sign_b;
   reg [7:0] exp_a, exp_b;
   reg [7:0] exp_a_bias, exp_b_bias;
@@ -70,17 +71,17 @@ module mul (
     prod = prod_dbl[13:7];
 
     // Postnormalize product
-    while (prod[6] == 0) begin
-      prod = prod << 1;
-      exp_unbiased = exp_unbiased - 1;
-    end
-
-    sign = sign_a ^ sign_b;
-    if (prod == 0) begin 
+    if (prod == 0) begin
       sum = 16'b0;
-    end
-    else begin
-      sum = {sign, exp_unbiased, prod};
+    end else begin
+      for (i = 0; i < 6; i = i + 1) begin
+        if (prod[6] == 0) begin
+          prod = prod << 1;
+          exp_unbiased = exp_unbiased - 1;
+        end
+        sign = sign_a ^ sign_b;
+        sum = {sign, exp_unbiased, prod};
+      end
     end
   end
 endmodule
